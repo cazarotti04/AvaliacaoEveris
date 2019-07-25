@@ -20,7 +20,7 @@ namespace Services
             catch (Exception ex)
             {
 
-                throw new Exception("Erro");
+                throw new Exception("Erro ao se conectar no banco de dados");
             }
         }
 
