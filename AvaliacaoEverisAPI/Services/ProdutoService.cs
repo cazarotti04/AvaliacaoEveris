@@ -93,6 +93,8 @@ namespace Services
                 bool existe = false;
                 string deleta = "DELETE FROM Produtos WHERE cdgProduto = " + cdgProduto;
 
+                conexao.Open();
+
                 existe = validator.ProdutoExistente(cdgProduto);
 
                 if (!existe)
@@ -101,6 +103,7 @@ namespace Services
                 try
                 {
                     conexao.Execute(deleta);
+                    conexao.Close();
                 }
                 catch (Exception)
                 {
@@ -109,7 +112,35 @@ namespace Services
             }
         }
 
+        public Produto EditaProduto(Produto produto)
+        {
+            using (SqlConnection conexao = new SqlConnection(connectionString))
+            {
+                bool valido = false;
+                string update = "UPDATE Produtos SET Empresa = @EMPRESA, Produto = @PRODUTO, Entrada = @ENTRADA, Saida = @SAIDA, Estoque = @ESTOQUE WHERE cdgProduto = " + produto.CDGPRODUTO;
 
+                valido = validator.ProdutoExistente((int)produto.CDGPRODUTO);
+
+                if(!valido)
+                    throw new Exception("Erro ao buscar o produto no banco");
+
+                valido = validator.ValidaProdutoNovo(produto);
+
+                if (!valido)
+                    throw new Exception("Erro ao validar as informações do seu produto. Verifique todos os campos");
+
+                try
+                {
+                    conexao.Execute(update, new { EMPRESA = produto.EMPRESA, PRODUTO = produto.PRODUTO, ENTRADA = produto.ENTRADA, SAIDA = produto.SAIDA, ESTOQUE = produto.ESTOQUE });
+
+                    return produto;
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Houve um erro ao editar o produto");
+                }
+            }
+        }
 
     }
 }

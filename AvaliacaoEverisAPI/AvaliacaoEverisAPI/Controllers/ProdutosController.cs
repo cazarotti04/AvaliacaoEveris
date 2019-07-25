@@ -10,20 +10,14 @@ namespace AvaliacaoEverisAPI.Controllers
 {
     public class ProdutosController : Controller
     {
-        // GET: Produtos
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
 
         ProdutoService service = new ProdutoService();
 
-        //[HttpPost]
+        [HttpPost]
         public ActionResult InsereProduto(Produto produto)
         {
             try
             {
-
                 var result = service.InsereProduto(produto);
 
                 return Json(result, JsonRequestBehavior.AllowGet);
@@ -50,7 +44,7 @@ namespace AvaliacaoEverisAPI.Controllers
             }
         }
 
-        //[HttpDelete]
+        [HttpDelete]
         public ActionResult RemoverProduto(int cdgProduto)
         {
             try
@@ -65,7 +59,20 @@ namespace AvaliacaoEverisAPI.Controllers
             }
         }
 
+        [HttpPut]
+        public ActionResult EditaProduto(Produto produto)
+        {
+            try
+            {
+                var result = service.EditaProduto(produto);
 
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                throw new Exception("Erro ao editar o produto");
+            }
+        }
     }
 }
 
