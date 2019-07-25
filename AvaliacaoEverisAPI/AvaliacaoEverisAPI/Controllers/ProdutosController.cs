@@ -18,7 +18,7 @@ namespace AvaliacaoEverisAPI.Controllers
 
         ProdutoService service = new ProdutoService();
 
-        [HttpPost]
+        //[HttpPost]
         public ActionResult InsereProduto(Produto produto)
         {
             try
@@ -47,6 +47,21 @@ namespace AvaliacaoEverisAPI.Controllers
             {
 
                 throw new Exception("Erro ao listar os produtos");
+            }
+        }
+
+        //[HttpDelete]
+        public ActionResult RemoverProduto(int cdgProduto)
+        {
+            try
+            {
+                service.RemoveProduto(cdgProduto);
+
+                return Json("O produto foi deletado com sucesso");
+            }
+            catch (Exception)
+            {
+                throw new Exception("Erro ao deletar o produto");
             }
         }
 

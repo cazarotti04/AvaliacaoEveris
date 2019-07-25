@@ -14,12 +14,12 @@ namespace Services
     public class ProdutoService
     {
         string connectionString = ConnectionDb.connectionString;
+        ProdutoValidator validator = new ProdutoValidator();
+
 
         public Produto InsereProduto(Produto produto)
         {
             bool erro = false;
-            var validator = new ProdutoValidator();
-
 
             erro = validator.ValidaProdutoNovo(produto);
 
@@ -85,6 +85,30 @@ namespace Services
                 return lista;
             }
         }
+
+        public void RemoveProduto(int cdgProduto)
+        {
+            using (SqlConnection conexao = new SqlConnection(connectionString))
+            {
+                bool existe = false;
+                string deleta = "DELETE FROM Produtos WHERE cdgProduto = " + cdgProduto;
+
+                existe = validator.ProdutoExistente(cdgProduto);
+
+                if (!existe)
+                    throw new Exception("Produto não encontrado");
+
+                try
+                {
+                    conexao.Execute(deleta);
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Houve um erro ao deletar o produto selecionado");
+                }
+            }
+        }
+
 
 
     }
