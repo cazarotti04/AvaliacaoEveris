@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Utils.Models;
-using Services;
+using AvaliacaoEverisAPI.Models;
+using AvaliacaoEverisAPI.Services;
 
 namespace AvaliacaoEverisAPI.Controllers
 {
@@ -20,7 +20,8 @@ namespace AvaliacaoEverisAPI.Controllers
             {
                 var result = service.InsereProduto(produto);
 
-                return Json(result, JsonRequestBehavior.AllowGet);
+                //return Json(result, JsonRequestBehavior.AllowGet);
+                return Redirect("/Home/Index");
             }
             catch (Exception)
             {
@@ -72,6 +73,11 @@ namespace AvaliacaoEverisAPI.Controllers
             {
                 throw new Exception("Erro ao editar o produto");
             }
+        }
+
+        public ActionResult CadastrarProduto(Produto produto)
+        {
+            return View(produto);
         }
     }
 }

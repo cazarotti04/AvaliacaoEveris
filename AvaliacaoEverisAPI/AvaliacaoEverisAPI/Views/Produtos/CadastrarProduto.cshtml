@@ -1,0 +1,66 @@
+﻿@{
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+@model AvaliacaoEverisAPI.Models.Produto
+ 
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div class="header jumbotron">
+        <h1>Cadastro de produto</h1>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                @using (Ajax.BeginForm("InsereProduto", "Produtos", new AjaxOptions() { HttpMethod = "POST" }))
+                {
+                    @*@Html.EditorForModel()*@
+
+                    <div class="form-group">
+                        @Html.LabelFor(Model => Model.NOMEPRODUTO)
+                        <br />
+                        @Html.EditorFor(Model => Model.NOMEPRODUTO)
+                    </div>
+
+                   <div class="form-group">
+                        @Html.LabelFor(Model => Model.EMPRESA)
+                        <br />
+                        @Html.EditorFor(Model => Model.EMPRESA)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(Model => Model.ENTRADA)
+                        <br />
+                        @Html.EditorFor(Model => Model.ENTRADA)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(Model => Model.SAIDA)
+                        <br />
+                        @Html.EditorFor(Model => Model.SAIDA)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(Model => Model.ESTOQUE)
+                        <br />
+                        @Html.EditorFor(Model => Model.ESTOQUE)
+                    </div>
+
+                    <div class="row">&nbsp;</div>
+                    <div>
+                        <a><button class="btn btn-warning"><p>@Html.ActionLink("Voltar", "Index", "Home")</p></button></a>
+                        <input type="submit" value="Enviar" />
+                    </div>
+                }
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>
