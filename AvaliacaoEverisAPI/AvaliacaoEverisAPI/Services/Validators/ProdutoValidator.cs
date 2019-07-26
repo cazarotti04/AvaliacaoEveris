@@ -30,12 +30,25 @@ namespace AvaliacaoEverisAPI.Services.Validators
             using(SqlConnection conexao = new SqlConnection(connectionString))
             {
                 var verificaProduto = new Produto();
+                var instancia = new Produto();
 
                 string consulta = "SELECT * FROM Produtos WHERE cdgProduto = " + cdgProduto;
 
                 verificaProduto = conexao.Query<Produto>(consulta).FirstOrDefault();
 
-                return !verificaProduto.Equals(new Produto()) && verificaProduto != null;
+
+                if (verificaProduto == null)
+                    return false;
+                else
+                {
+                    if (verificaProduto.Equals(instancia))
+                        return false;
+
+                    return true;
+                }
+
+                
+                
             }
         }
     }

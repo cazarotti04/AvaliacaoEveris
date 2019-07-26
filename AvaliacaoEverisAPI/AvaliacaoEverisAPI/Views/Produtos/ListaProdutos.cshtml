@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width" />
     <script src="~/Scripts/jquery-3.3.1.js"></script>
     <script src="~/Scripts/sorter.js"></script>
+    <script src="~/Scripts/typeahead.jquery.js"></script>
     <title></title>
 </head>
 <body>
@@ -22,7 +23,7 @@
         <div class="row" style="margin-left:auto;">
             <input type="number" id="cdgProduto" onkeyup="filtraCodigo()" placeholder="Codigo" />
             <input type="text" id="nomeProduto" onkeyup="filtraProduto()" placeholder="Produto" />
-            <input type="text" id="empresa" onkeyup="filtraEmpresa()" placeholder="Empresa" />
+            <input type="text" class="typeahead" id="empresa" onkeyup="filtraEmpresa()" placeholder="Empresa" />
             <input type="number" id="entrada" onkeyup="filtraEntrada()" placeholder="Entrada" />
             <input type="number" id="saida" onkeyup="filtraSaida()" placeholder="Saida" />
             <input type="number" id="estoque" onkeyup="filtraEstoque()" placeholder="Estoque" />
@@ -183,5 +184,5 @@
 </script>
 
 <script>
-     $(".tablesorter").tablesorter();
+    $(".tablesorter").tablesorter();
 </script>

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using AvaliacaoEverisAPI.Models;
 using AvaliacaoEverisAPI.Services;
+using ClosedXML.Excel;
 
 namespace AvaliacaoEverisAPI.Controllers
 {
@@ -75,6 +76,16 @@ namespace AvaliacaoEverisAPI.Controllers
             {
                 throw new Exception("Erro ao editar o produto");
             }
+        }
+
+        [HttpGet]
+        public ActionResult AtualizaExcel()
+        {
+            var wb = new XLWorkbook(@"C:\dados.xlsx");
+
+            service.AtualizaExcel(wb);
+
+            return Json("ok");
         }
 
         public ActionResult CadastrarProduto()
