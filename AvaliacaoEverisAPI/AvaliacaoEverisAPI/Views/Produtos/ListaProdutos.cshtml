@@ -1,0 +1,181 @@
+﻿@{
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+@model List<AvaliacaoEverisAPI.Models.Produto>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div class="header jumbotron">
+        <h1>Lista de produtos</h1>
+    </div>
+    <div>
+        <div class="row" style="margin-left:auto;">
+            <input type="number" id="cdgProduto" onkeyup="filtraCodigo()" placeholder="Codigo" />
+            <input type="text" id="nomeProduto" onkeyup="filtraProduto()" placeholder="Produto" />
+            <input type="text" id="empresa" onkeyup="filtraEmpresa()" placeholder="Empresa" />
+            <input type="number" id="entrada" onkeyup="filtraEntrada()" placeholder="Entrada" />
+            <input type="number" id="saida" onkeyup="filtraSaida()" placeholder="Saida" />
+            <input type="number" id="estoque" onkeyup="filtraEstoque()" placeholder="Estoque" />
+        </div>
+        <div class="row">&nbsp;</div>
+        <table id="tabela" style="width:100%;" class="tablesorter table table-striped table-bordered table-condensed">
+            <thead>
+                <tr class="header">
+                    <th>Codigo</th>
+                    <th>Produto</th>
+                    <th>Empresa</th>
+                    <th>Entrada</th>
+                    <th>Saida</th>
+                    <th>Estoque</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td data-sort="int">@item.CDGPRODUTO</td>
+                        <td data-sort="string">@item.NOMEPRODUTO</td>
+                        <td data-sort="string">@item.EMPRESA</td>
+                        <td data-sort="int">@item.ENTRADA</td>
+                        <td data-sort="int">@item.SAIDA</td>
+                        <td data-sort="int">@item.ESTOQUE</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+<script>
+
+    function filtraCodigo() {
+
+        var input = document.getElementById("cdgProduto");
+        var filter = input.value.toUpperCase();
+        var table = document.getElementById("tabela");
+        var tr = table.getElementsByTagName("tr");
+
+        for (var i = 0; i < tr.length; i++) {
+            var td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                var txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    function filtraProduto() {
+
+        var input = document.getElementById("nomeProduto");
+        var filter = input.value.toUpperCase();
+        var table = document.getElementById("tabela");
+        var tr = table.getElementsByTagName("tr");
+
+        for (var i = 0; i < tr.length; i++) {
+            var td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                var txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    function filtraEmpresa() {
+
+        var input = document.getElementById("empresa");
+        var filter = input.value.toUpperCase();
+        var table = document.getElementById("tabela");
+        var tr = table.getElementsByTagName("tr");
+
+        for (var i = 0; i < tr.length; i++) {
+            var td = tr[i].getElementsByTagName("td")[2];
+            if (td) {
+                var txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    function filtraEntrada() {
+
+        var input = document.getElementById("entrada");
+        var filter = input.value.toUpperCase();
+        var table = document.getElementById("tabela");
+        var tr = table.getElementsByTagName("tr");
+
+        for (var i = 0; i < tr.length; i++) {
+            var td = tr[i].getElementsByTagName("td")[3];
+            if (td) {
+                var txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    function filtraSaida() {
+
+        var input = document.getElementById("saida");
+        var filter = input.value.toUpperCase();
+        var table = document.getElementById("tabela");
+        var tr = table.getElementsByTagName("tr");
+
+        for (var i = 0; i < tr.length; i++) {
+            var td = tr[i].getElementsByTagName("td")[4];
+            if (td) {
+                var txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    function filtraEstoque() {
+
+        var input = document.getElementById("estoque");
+        var filter = input.value.toUpperCase();
+        var table = document.getElementById("tabela");
+        var tr = table.getElementsByTagName("tr");
+
+        for (var i = 0; i < tr.length; i++) {
+            var td = tr[i].getElementsByTagName("td")[5];
+            if (td) {
+                var txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+
+
+</script>

@@ -36,7 +36,9 @@ namespace AvaliacaoEverisAPI.Controllers
             {
                 var result = service.ListaProdutos();
 
-                return Json(result, JsonRequestBehavior.AllowGet);
+                //return Json(result, JsonRequestBehavior.AllowGet);
+
+                return View(result);
             }
             catch (Exception)
             {
@@ -75,10 +77,11 @@ namespace AvaliacaoEverisAPI.Controllers
             }
         }
 
-        public ActionResult CadastrarProduto(Produto produto)
+        public ActionResult CadastrarProduto()
         {
-            return View(produto);
+            return View();
         }
+
     }
 }
 
