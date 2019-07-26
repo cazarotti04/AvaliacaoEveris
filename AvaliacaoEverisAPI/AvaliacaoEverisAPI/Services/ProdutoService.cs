@@ -15,7 +15,6 @@ namespace AvaliacaoEverisAPI.Services
         string connectionString = ConnectionDb.connectionString;
         ProdutoValidator validator = new ProdutoValidator();
 
-
         public Produto InsereProduto(Produto produto)
         {
             bool erro = false;

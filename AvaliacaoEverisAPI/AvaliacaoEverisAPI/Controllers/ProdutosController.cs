@@ -82,6 +82,12 @@ namespace AvaliacaoEverisAPI.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult EditProduto(int produto)
+        {
+            return View(produto);
+        }
+
     }
 }
 

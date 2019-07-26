@@ -1,5 +1,6 @@
 ﻿@{
     Layout = "../Shared/_Layout.cshtml";
+    var teste = 0;
 }
 
 @model List<AvaliacaoEverisAPI.Models.Produto>
@@ -9,6 +10,8 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/sorter.js"></script>
     <title></title>
 </head>
 <body>
@@ -34,18 +37,20 @@
                     <th>Entrada</th>
                     <th>Saida</th>
                     <th>Estoque</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td data-sort="int">@item.CDGPRODUTO</td>
-                        <td data-sort="string">@item.NOMEPRODUTO</td>
-                        <td data-sort="string">@item.EMPRESA</td>
-                        <td data-sort="int">@item.ENTRADA</td>
-                        <td data-sort="int">@item.SAIDA</td>
-                        <td data-sort="int">@item.ESTOQUE</td>
+                        <td>@item.CDGPRODUTO</td>
+                        <td>@item.NOMEPRODUTO</td>
+                        <td>@item.EMPRESA</td>
+                        <td>@item.ENTRADA</td>
+                        <td>@item.SAIDA</td>
+                        <td>@item.ESTOQUE</td>
+                        
                     </tr>
                 }
             </tbody>
@@ -174,8 +179,9 @@
                 }
             }
         }
-    }
+        }
+</script>
 
-
-
+<script>
+     $(".tablesorter").tablesorter();
 </script>

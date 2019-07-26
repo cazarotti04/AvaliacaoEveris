@@ -3,7 +3,7 @@
 }
 
 @model AvaliacaoEverisAPI.Models.Produto
- 
+
 <!DOCTYPE html>
 
 <html>
@@ -13,14 +13,13 @@
 </head>
 <body>
     <div class="header jumbotron">
-        <h1>Cadastro de produto</h1>
+        <h1>Editar produto</h1>
     </div>
     <div class="container">
         <div class="row">
             <div class="col">
-                @using (Ajax.BeginForm("InsereProduto", "Produtos", new AjaxOptions() { HttpMethod = "POST" }))
+                @using (Ajax.BeginForm("EditaProduto", "Produtos", new AjaxOptions() { HttpMethod = "PUT" }))
                 {
-                    @*@Html.EditorForModel()*@
 
                     <div class="form-group">
                         @Html.LabelFor(Model => Model.NOMEPRODUTO)
@@ -28,7 +27,7 @@
                         @Html.EditorFor(Model => Model.NOMEPRODUTO)
                     </div>
 
-                   <div class="form-group">
+                    <div class="form-group">
                         @Html.LabelFor(Model => Model.EMPRESA)
                         <br />
                         @Html.EditorFor(Model => Model.EMPRESA)
@@ -55,12 +54,12 @@
                     <div class="row">&nbsp;</div>
                     <div>
                         <a><button class="btn btn-warning"><p>@Html.ActionLink("Voltar", "Index", "Home")</p></button></a>
-                        <input type="submit" value="Cadastrar" />
+                        <input type="submit" value="Enviar" />
                     </div>
                 }
             </div>
         </div>
-        
+
     </div>
 </body>
 </html>
