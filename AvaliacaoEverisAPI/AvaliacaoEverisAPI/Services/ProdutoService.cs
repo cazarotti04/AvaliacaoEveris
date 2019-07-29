@@ -8,6 +8,7 @@ using System.Linq;
 using AvaliacaoEverisAPI.Services.Validators;
 using AvaliacaoEverisAPI.Models;
 using ClosedXML.Excel;
+using Dapper.Contrib;
 
 namespace AvaliacaoEverisAPI.Services
 {
@@ -61,6 +62,26 @@ namespace AvaliacaoEverisAPI.Services
             }
         }
 
+        public Produto BuscaPorCodigo(int codigo)
+        {
+            using (SqlConnection conexao = new SqlConnection(connectionString))
+            {
+                var produto = new Produto();
+                string consulta = "SELECT * FROM Produtos WHERE cdgProduto = " + codigo;
+                try
+                {
+                    produto = conexao.Query<Produto>(consulta).FirstOrDefault();
+
+                    return produto;
+                }
+                catch (Exception)
+                {
+
+                    throw new Exception("Erro ao buscar produto por código");
+                }
+            }
+        }
+
         public List<Produto> ListaProdutos()
         {
             using (SqlConnection conexao = new SqlConnection(connectionString))
@@ -111,7 +132,7 @@ namespace AvaliacaoEverisAPI.Services
             }
         }
 
-        public Produto EditaProduto(Produto produto)
+        public Produto EditaProduto(Produto produto, bool excel = false)
         {
             using (SqlConnection conexao = new SqlConnection(connectionString))
             {
@@ -134,9 +155,12 @@ namespace AvaliacaoEverisAPI.Services
 
                     var existente = conexao.Query<Produto>(consulta).FirstOrDefault();
 
-                    produto.ESTOQUE += existente.ESTOQUE;
-                    produto.ENTRADA += existente.ENTRADA;
-                    produto.SAIDA += existente.SAIDA;
+                    if (excel)
+                    {
+                        produto.ESTOQUE += existente.ESTOQUE;
+                        produto.ENTRADA += existente.ENTRADA;
+                        produto.SAIDA += existente.SAIDA;
+                    }
 
                     conexao.Execute(update, new { EMPRESA = produto.EMPRESA, NOMEPRODUTO = produto.NOMEPRODUTO, ENTRADA = produto.ENTRADA, SAIDA = produto.SAIDA, ESTOQUE = produto.ESTOQUE });
 
@@ -205,7 +229,7 @@ namespace AvaliacaoEverisAPI.Services
                     if (!x)
                         InsereProduto(item);
                     else
-                        EditaProduto(item);
+                        EditaProduto(item, true);
                 }
                 catch (Exception)
                 {

@@ -217,6 +217,7 @@
     <Content Include="Views\Produtos\CadastrarProduto.cshtml" />
     <Content Include="Views\Produtos\ListaProdutos.cshtml" />
     <Content Include="Views\Produtos\EditProduto.cshtml" />
+    <Content Include="Views\Produtos\UploadArquivo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -18,8 +18,14 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                @using (Ajax.BeginForm("EditaProduto", "Produtos", new AjaxOptions() { HttpMethod = "PUT" }))
+                @using (Ajax.BeginForm("EditaProduto", "Produtos", new AjaxOptions() { HttpMethod = "POST" }))
                 {
+
+                    <div class="form-group">
+                        <label for="cdgproduto">CODIGO DO PRODUTO</label>
+                        <br />
+                        @Html.EditorFor(Model => Model.CDGPRODUTO, new { htmlAttributes = new { @readonly = "readonly" }})
+                    </div>
 
                     <div class="form-group">
                         @Html.LabelFor(Model => Model.NOMEPRODUTO)
@@ -53,13 +59,12 @@
 
                     <div class="row">&nbsp;</div>
                     <div>
-                        <a><button class="btn btn-warning"><p>@Html.ActionLink("Voltar", "Index", "Home")</p></button></a>
-                        <input type="submit" value="Enviar" />
+                        <button class="btn btn-warning"><p>@Html.ActionLink("Voltar", "Index", "Home")</p></button>
+                        <input type="submit" value="Editar" />
                     </div>
                 }
             </div>
         </div>
-
     </div>
 </body>
 </html>

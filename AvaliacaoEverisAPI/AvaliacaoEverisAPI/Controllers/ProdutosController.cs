@@ -13,6 +13,7 @@ namespace AvaliacaoEverisAPI.Controllers
     {
 
         ProdutoService service = new ProdutoService();
+        HomeController home = new HomeController();
 
         [HttpPost]
         public ActionResult InsereProduto(Produto produto)
@@ -63,14 +64,14 @@ namespace AvaliacaoEverisAPI.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPost]
         public ActionResult EditaProduto(Produto produto)
         {
             try
             {
-                var result = service.EditaProduto(produto);
+                var result = service.EditaProduto(produto, false);
 
-                return Json(result, JsonRequestBehavior.AllowGet);
+                return Redirect("/Home/Index");
             }
             catch (Exception)
             {
@@ -80,6 +81,7 @@ namespace AvaliacaoEverisAPI.Controllers
 
         [HttpGet]
         public ActionResult AtualizaExcel()
+
         {
             var wb = new XLWorkbook(@"C:\dados.xlsx");
 
@@ -88,15 +90,21 @@ namespace AvaliacaoEverisAPI.Controllers
             return Json("ok");
         }
 
+        public ActionResult UploadArquivo()
+        {
+            return View();
+        }
+
         public ActionResult CadastrarProduto()
         {
             return View();
         }
 
-        [HttpPost]
         public ActionResult EditProduto(int produto)
         {
-            return View(produto);
+            var objProduto = service.BuscaPorCodigo(produto);
+            return PartialView(objProduto);
+            //return View(objProduto);
         }
 
     }

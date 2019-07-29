@@ -51,7 +51,8 @@
                         <td>@item.ENTRADA</td>
                         <td>@item.SAIDA</td>
                         <td>@item.ESTOQUE</td>
-                        
+                        @*<td><button onclick="fteste(@item.CDGPRODUTO)">teste</button></td>*@
+                        <td>@Html.ActionLink("Editar", "EditProduto", "Produtos", new { produto = item.CDGPRODUTO}, null)</td>
                     </tr>
                 }
             </tbody>
@@ -180,7 +181,18 @@
                 }
             }
         }
-        }
+    }
+
+    function fteste(vamover) {
+        teste = vamover;
+        //$.ajax({
+        //    type: 'POST',
+        //    url: "/Produtos/EditProduto",
+        //    data: { produto : vamover }
+        //})
+        @Html.ActionLink("Teste", "EditProduto", "Produtos", teste);
+    }
+
 </script>
 
 <script>
