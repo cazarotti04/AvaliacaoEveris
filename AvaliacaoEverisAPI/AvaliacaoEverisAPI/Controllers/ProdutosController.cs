@@ -80,19 +80,19 @@ namespace AvaliacaoEverisAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult AtualizaExcel()
-
+        public ActionResult AtualizaExcel(string file)
         {
-            var wb = new XLWorkbook(@"C:\dados.xlsx");
+            //var wb = new XLWorkbook(@"C:\dados.xlsx");
 
-            service.AtualizaExcel(wb);
+            service.AtualizaExcel(file);
 
-            return Json("ok");
+            return Redirect("/Home/Index");
         }
 
         public ActionResult UploadArquivo()
         {
-            return View();
+            var file = new MyFile();
+            return View(file);
         }
 
         public ActionResult CadastrarProduto()

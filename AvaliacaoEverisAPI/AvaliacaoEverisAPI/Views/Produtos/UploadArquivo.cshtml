@@ -1,5 +1,6 @@
 ﻿@{
     Layout = "../Shared/_Layout.cshtml";
+    var teste = "";
 }
 
 <!DOCTYPE html>
@@ -11,7 +12,40 @@
 </head>
 <body>
     <div>
-        <input type="file" name="name" />
+        @using (Ajax.BeginForm("AtualizaExcel", "Produtos", new AjaxOptions() { HttpMethod = "POST" }))
+        {
+            <input type="file" id="file"  accept=".xlsx" on/>
+
+            <button id="botao">Ok</button>
+        }
     </div>
 </body>
 </html>
+
+<script>
+
+    document.getElementById('botao').addEventListener('click', function () {
+        event.preventDefault();
+        var files = document.getElementById('file').files;
+        if (files.length > 0) {
+        getBase64(files[0]);
+      }
+    });
+
+    function getBase64(file) {
+       var reader = new FileReader();
+       reader.readAsDataURL(file);
+       reader.onload = function () {
+           console.log(reader.result);
+           var arquivo = reader.result;
+           $.ajax({
+               url: '/Produtos/AtualizaExcel',
+               data: { file : arquivo }
+           })
+       };
+       reader.onerror = function (error) {
+         console.log('Error: ', error);
+       };
+    }
+
+</script>

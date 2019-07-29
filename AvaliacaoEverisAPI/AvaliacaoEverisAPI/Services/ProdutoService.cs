@@ -9,6 +9,7 @@ using AvaliacaoEverisAPI.Services.Validators;
 using AvaliacaoEverisAPI.Models;
 using ClosedXML.Excel;
 using Dapper.Contrib;
+using System.IO;
 
 namespace AvaliacaoEverisAPI.Services
 {
@@ -173,8 +174,14 @@ namespace AvaliacaoEverisAPI.Services
             }
         }
 
-        public void AtualizaExcel(XLWorkbook wb)
+        public void AtualizaExcel(string arqBase64)
         {
+            var bytes = Convert.FromBase64String(arqBase64);
+            var ms = new MemoryStream(bytes);
+
+
+            var wb = new XLWorkbook(ms);
+
             var planilha = wb.Worksheet(1);
 
             var lista = new List<Produto>();
