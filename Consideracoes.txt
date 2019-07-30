@@ -1,0 +1,7 @@
+Sobre o exercício 2.4
+	- Não sei se o intuiuto era fazer uma implementação do zero, mas eu utilizei scripts js para realizar a ordenação da tabela pelas colunas
+
+Sobre o exercício 2.7
+	- Estou com um problema para converter o arquivo em base64 para o arquivo em excel
+	- A lógica de atualização e inserção de novos produtos está funcional
+	- Os parametros das funções em questão estão comentados, gostaria que testasse usando o arquivo local, para isso, basta inserir na linha 225, do arquivo ProdutoService.cs, o caminho correto do arquivo, e chamar a função pelo link "/Produtos/AtualizaExcel"
