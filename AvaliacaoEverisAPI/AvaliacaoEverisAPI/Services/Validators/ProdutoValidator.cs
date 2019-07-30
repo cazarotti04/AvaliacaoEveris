@@ -11,8 +11,16 @@ namespace AvaliacaoEverisAPI.Services.Validators
 {
     public class ProdutoValidator
     {
+        //@brief Busca a connection string definida nos paraetros do projeto
         string connectionString = ConnectionDb.connectionString;
 
+        /**
+        *   @brief Método para validar as informações de um produto
+        *
+        *   @param produto Objeto enviado que representa o produto a ser validado
+        *
+        *   @return true caso o produto seja valido, false caso contrario
+        */
         public bool ValidaProdutoNovo(Produto produto)
         {
             if (produto.EMPRESA == "" || produto.EMPRESA == null)
@@ -25,6 +33,13 @@ namespace AvaliacaoEverisAPI.Services.Validators
             return true;
         }
 
+        /**
+        *   @brief Método para validar se o produto com X código existe
+        *
+        *   @param cdgProduto Número inteiro que representa o código do produto a ser verificado
+        *
+        *   @return true caso o produto com tal código exista, false caso contrário
+        */
         public bool ProdutoExistente(int cdgProduto)
         {
             using(SqlConnection conexao = new SqlConnection(connectionString))

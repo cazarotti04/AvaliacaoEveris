@@ -15,9 +15,19 @@ namespace AvaliacaoEverisAPI.Services
 {
     public class ProdutoService
     {
+        //@brief Busca a connection string definida nos paraetros do projeto
         string connectionString = ConnectionDb.connectionString;
+
+        //@brief Instancia a classe de validacao do produto
         ProdutoValidator validator = new ProdutoValidator();
 
+        /**
+        *   @brief Método para validar as informações do produto e inserilo no banco de dados
+        *
+        *   @param produto Objeto enviado, via controlador, que representa o novo produto cadastrado
+        *
+        *   @return Instancia do novo produto cadastrado
+        */
         public Produto InsereProduto(Produto produto)
         {
             bool erro = false;
@@ -63,6 +73,13 @@ namespace AvaliacaoEverisAPI.Services
             }
         }
 
+        /**
+        *   @brief Método para buscar um produto no banco de dados pelo seu código
+        *
+        *   @param produto Número inteiro que representa o código do produto
+        *
+        *   @return Instancia do produto especificado
+        */
         public Produto BuscaPorCodigo(int codigo)
         {
             using (SqlConnection conexao = new SqlConnection(connectionString))
@@ -83,6 +100,11 @@ namespace AvaliacaoEverisAPI.Services
             }
         }
 
+        /**
+        *   @brief Método para buscar a lista de produtos cadastrados no banco de dados
+        *
+        *   @return List<Produto> retorna a lista de produtos existentes
+        */
         public List<Produto> ListaProdutos()
         {
             using (SqlConnection conexao = new SqlConnection(connectionString))
@@ -107,6 +129,12 @@ namespace AvaliacaoEverisAPI.Services
             }
         }
 
+        /**
+        *   @brief Método para remover um produto do banco de dados
+        *
+        *   @param cdgProduto Número inteiro que representa o código do produto a ser deletado
+        *
+        */
         public void RemoveProduto(int cdgProduto)
         {
             using (SqlConnection conexao = new SqlConnection(connectionString))
@@ -133,6 +161,14 @@ namespace AvaliacaoEverisAPI.Services
             }
         }
 
+        /**
+        *   @brief Método para validar as edições de um produto e salva-las no banco de dados
+        *
+        *   @param produto Objeto enviado, por meio do controlador, que representa produto a ser editado
+        *   @param excel Valor booleano para especificar se a edição está sendo feita por um arquivo em excel ou não
+        *
+        *   @return Produto Objeto com suas devidas alterações
+        */
         public Produto EditaProduto(Produto produto, bool excel = false)
         {
             using (SqlConnection conexao = new SqlConnection(connectionString))
@@ -174,13 +210,19 @@ namespace AvaliacaoEverisAPI.Services
             }
         }
 
-        public void AtualizaExcel(string arqBase64)
+        /**
+        *   @brief Método para realizar a leitura do arquivo em excel e estruturar seus dados afim de fazer inserções e alterações no banco de dados
+        *
+        *   @param arqBase64 Cadeia de caracteres que representa o arquivo em excel convertido para base64
+        *
+        */
+        public void AtualizaExcel(/*string arqBase64*/)
         {
-            var bytes = Convert.FromBase64String(arqBase64);
-            var ms = new MemoryStream(bytes);
+            //var bytes = Convert.FromBase64String(arqBase64);
+            //var ms = new MemoryStream(bytes);
+            //var wb = new XLWorkbook(ms);
 
-
-            var wb = new XLWorkbook(ms);
+            var wb = new XLWorkbook(@"C:/Caminho_do_Arquivo");
 
             var planilha = wb.Worksheet(1);
 

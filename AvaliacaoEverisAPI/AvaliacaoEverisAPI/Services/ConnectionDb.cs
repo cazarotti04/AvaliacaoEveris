@@ -5,6 +5,10 @@ using System.Configuration;
 
 namespace AvaliacaoEverisAPI.Services
 {
+        /**
+        *   @brief Classe usada pelo sistema para realizar a conexao com o banco de dados
+        *
+        */
     public class ConnectionDb
     {
         public static string connectionString { get; set; }

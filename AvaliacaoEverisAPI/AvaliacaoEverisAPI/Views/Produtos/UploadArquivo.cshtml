@@ -11,11 +11,14 @@
     <title></title>
 </head>
 <body>
+    <div class="header jumbotron">
+        <h1>Atualização de estoque via planilha</h1>
+    </div>
     <div>
         @using (Ajax.BeginForm("AtualizaExcel", "Produtos", new AjaxOptions() { HttpMethod = "POST" }))
         {
-            <input type="file" id="file"  accept=".xlsx" on/>
-
+            <input type="file" id="file" accept=".xlsx" on />
+            <br />
             <button id="botao">Ok</button>
         }
     </div>
